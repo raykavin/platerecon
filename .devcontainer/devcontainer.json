@@ -1,0 +1,52 @@
+{
+    "name": "Go DevContainer with Fish",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+    "workspaceFolder": "/workspaces/platerecon",
+    "forwardPorts": [
+        3000
+    ],
+    "runArgs": [
+        "--network=host",
+        "--device=/dev/video0",
+        "--group-add=video"
+    ],
+    "containerEnv": {
+        "DISPLAY": "${env:DISPLAY}",
+        "WAYLAND_DISPLAY": "${env:WAYLAND_DISPLAY}",
+        "XDG_RUNTIME_DIR": "${env:XDG_RUNTIME_DIR}"
+    },
+    "mounts": [
+        "source=/run/user/1000/wayland-0,target=/run/user/1000/wayland-0,type=bind",
+        "source=${env:XDG_RUNTIME_DIR},target=${env:XDG_RUNTIME_DIR},type=bind"
+    ],
+    "postCreateCommand": "go mod tidy && git config --global --add safe.directory /workspaces/platerecon",
+    "features": {
+        "ghcr.io/devcontainers/features/git:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "golang.Go",
+                "golang.go-nightly",
+                "liuchao.go-struct-tag",
+                "yokoe.vscode-postfix-go",
+                "ms-ceintl.vscode-language-pack-pt-br",
+                "streetsidesoftware.code-spell-checker",
+                "streetsidesoftware.code-spell-checker-portuguese-brazilian",
+                "visualstudioexptteam.vscodeintellicode",
+                "redhat.vscode-yaml",
+                "teddyandturtle.fish"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "fish",
+                "go.toolsManagement.checkForUpdates": "local",
+                "go.useLanguageServer": true,
+                "go.gopath": "/go",
+                "go.goroot": "/usr/local/go"
+            }
+        }
+    }
+}
