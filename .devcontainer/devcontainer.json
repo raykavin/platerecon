@@ -1,5 +1,6 @@
 {
     "name": "Go DevContainer with Fish",
+    "remoteUser": "vscode",
     "build": {
         "dockerfile": "Dockerfile",
         "context": ".."

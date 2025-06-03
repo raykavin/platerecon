@@ -1,34 +1,33 @@
-# Imagem base do Go com Debian (Microsoft)
+# Base image
 FROM mcr.microsoft.com/devcontainers/go:1-1.24-bookworm
 
 ENV DEBIAN_FRONTEND=noninteractive
-
 ARG USERNAME=vscode
-ARG USER_UID=1000
-ARG USER_GID=1000
 
-RUN apt-get update && apt-get install -y \
+# Install packages
+RUN apt-get update && apt-get install -y --no-install-recommends \
     fish \
-    sudo \
     git \
     curl \
+    sudo \
+    libtesseract-dev \
+    libleptonica-dev \
+    tesseract-ocr \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN if ! getent group $USERNAME >/dev/null; then \
-    groupadd --gid $USER_GID $USERNAME; \
-    fi
+# Change shell to fish
+RUN chsh -s /usr/bin/fish ${USERNAME}
 
-RUN if ! id -u $USERNAME >/dev/null 2>&1; then \
-    useradd --uid $USER_UID --gid $USER_GID -m $USERNAME; \
-    fi \
-    && usermod -aG sudo $USERNAME \
-    && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME \
-    && chmod 0440 /etc/sudoers.d/$USERNAME
+# Use non-root user
+USER ${USERNAME}
+WORKDIR /home/${USERNAME}/workspaces/platerecon
 
-RUN chsh -s /usr/bin/fish $USERNAME
+# Clone and install GoCV
+RUN git clone https://github.com/hybridgroup/gocv.git /tmp/gocv \
+    && cd /tmp/gocv \
+    && git checkout v0.41.0 \
+    && make install \
+    && rm -rf /tmp/gocv
 
-WORKDIR /home/$USERNAME/workspaces/pon_watcher
-
-USER $USERNAME
-
+# Start in fish shell
 CMD ["fish"]
