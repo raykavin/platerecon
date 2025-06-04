@@ -80,7 +80,7 @@ func NewPlateRecognitionSystem() *PlateRecognitionSystem {
 		lastVerification: time.Now(),
 		accessGranted:    false,
 		detectedPlate:    "SCANNING...",
-		minConfidence:    30.0, // Reduzido ainda mais para capturar mais detecções
+		minConfidence:    30.0,
 		minTextSize:      6,
 
 		// Brazilian plate dimensions (approximate ratios)
