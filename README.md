@@ -2,7 +2,7 @@
 
 A real-time license plate recognition system built in Go using OpenCV (GoCV) and Tesseract OCR. This system captures video from a camera, detects Brazilian license plates, and verifies them against an authorized list for access control.
 
-![Preview of BackNRun 1](images/1.jpg)
+![Preview of Platerecon 1](images/1.jpg)
 
 
 ## Features
@@ -459,7 +459,7 @@ webhooks := []WebhookConfig{
 
 MIT License © [Raykavin Meireles](https://github.com/raykavin)
 
-BackNRun is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
+Platerecon is licensed under the MIT License. See the [LICENSE](LICENSE.md) file for details.
 
 ---
 ## 📬 Contact
