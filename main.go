@@ -452,7 +452,7 @@ func (sys *PlateRecognitionSystem) findPlatesByEdges(img gocv.Mat) []PlateCandid
 		contours := gocv.FindContours(dilated, gocv.RetrievalExternal, gocv.ChainApproxSimple)
 
 		// Analyze each contour
-		for i := 0; i < contours.Size(); i++ {
+		for i := range contours.Size() {
 			contour := contours.At(i)
 			boundingRect := gocv.BoundingRect(contour)
 			area := boundingRect.Dx() * boundingRect.Dy()
