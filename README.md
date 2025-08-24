@@ -44,7 +44,7 @@ The easiest way to run this project is using the provided DevContainer configura
 #### Setup:
 1. Clone the repository:
 ```bash
-git clone https://github.com/raykavin/platerecon
+git clone https://github.com/raykavin/platerecon-go
 cd platerecon
 ```
 
@@ -474,3 +474,4 @@ Feel free to reach out for support or collaboration:
 ---
 
 **Note**: This system is designed for Brazilian license plates. For other countries, modify the regex patterns and validation logic accordingly.
+
